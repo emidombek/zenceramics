@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "home",
+    ".herokuapp.com",
 ]
 
 MIDDLEWARE = [
