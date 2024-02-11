@@ -8,6 +8,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'static/css/style.css' %}">
     {% endblock %}
 
     {% block extrameta %}
@@ -27,11 +29,8 @@
 
     {% block extrajs %}
     {% endblock %}
-
-    <title>Zen Ceramics {% block extra_title %}{% endblock %}</title>
   </head>
   <body>
-    <header class= "container-fluid fixed-top"></header>
 
     {% if messages %}
     <div class="message-container"></div>
