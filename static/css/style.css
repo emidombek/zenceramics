@@ -3,12 +3,10 @@
 
 .navbar-custom {
   background-color: #087990;
-  /* Cyan color */
 }
 
 .footer-custom {
   background-color: #087990;
-  /* Cyan color */
   color: white;
   padding: 10px;
 }
@@ -24,5 +22,8 @@ font-size: 28px;
 
 i {
   font-size: 28px;
-  /* Sets the font size for all <i> elements */
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #F6F3F3;
 }
