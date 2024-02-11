@@ -1,0 +1,12 @@
+/* custom.css */
+.navbar-custom {
+  background-color: #087990;
+  /* Cyan color */
+}
+
+.footer-custom {
+  background-color: #087990;
+  /* Cyan color */
+  color: white;
+  padding: 10px;
+}
