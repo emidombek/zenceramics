@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
+
 .navbar-custom {
   background-color: #087990;
   /* Cyan color */
@@ -15,4 +16,8 @@
 .navbar-brand {
 font-family: 'Pacifico',cursive;
 font-size: 28px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #ffffff !important;
 }
