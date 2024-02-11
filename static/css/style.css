@@ -21,3 +21,8 @@ font-size: 28px;
 .navbar-dark .navbar-nav .nav-link {
   color: #ffffff !important;
 }
+
+i {
+  font-size: 28px;
+  /* Sets the font size for all <i> elements */
+}
