@@ -1,6 +1,44 @@
-{% extends "base.html"%}
+{% extends 'base.html' %}
+
 {% load static %}
 
 {% block content %}
-<h1 class="display-4 text-success">Home</h1>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+
+  <!-- Hero Image -->
+  <div class="hero-image">
+    <img src="{% static 'path/to/hero-image.jpg' %}" alt="Hero Image" />
+  </div>
+
+  <!-- Silver Banner -->
+  <div class="silver-banner">
+    <h1>Shop Pottery</h1>
+    <div class="input-group mb-3 search-box">
+      <input type="text" class="form-control" placeholder="Search Products" aria-label="Search Products" />
+      <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
+    </div>
+  </div>
+
+  <!-- Cards with mt-5 -->
+  <div class="container mt-5">
+    <div class="row">
+      <!-- Card for Mugs -->
+      <div class="col-sm">
+        <div class="card">
+          <img src="{% static 'path/to/mugs.jpg' %}" class="card-img-top" alt="Mugs" />
+          <div class="card-body">
+            <h5 class="card-title">Mugs</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Shop</a>
+          </div>
+        </div>
+      </div>
+      <!-- Other cards similarly -->
+    </div>
+  </div>
+
+  <!-- Newsletter Signup -->
+  <div class="newsletter-signup">
+    <i class="bi bi-mailbox"></i> <a href="#">Sign up for our newsletter and get 10% off</a>
+  </div>
 {% endblock %}
