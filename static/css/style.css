@@ -41,3 +41,40 @@ i {
   background-color: #087990;
   color: white;
 }
+
+/* Hero Image */
+.hero-image {
+  height: 455px;
+  overflow: hidden;
+  border: none;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Silver Banner */
+.silver-banner {
+  background-color: silver;
+  height: 133px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-box {
+  width: 50%;
+}
+
+/* Cards */
+.card {
+  width: 18rem;
+}
+
+/* Newsletter Signup */
+.newsletter-signup {
+  text-align: center;
+}
