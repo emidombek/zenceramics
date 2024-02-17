@@ -93,3 +93,9 @@ h1 {
   height: 30px;
   background-color: #087990;
 }
+
+.hero-background {
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}
