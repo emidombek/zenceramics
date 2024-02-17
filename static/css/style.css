@@ -78,3 +78,8 @@ i {
 .newsletter-signup {
   text-align: center;
 }
+
+h1 {
+  color: #343A40;
+  font-weight: 300;
+}
