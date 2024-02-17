@@ -83,3 +83,13 @@ h1 {
   color: #343A40;
   font-weight: 300;
 }
+
+.custom-search-size {
+  height: 30px;
+  width: 350px;
+}
+
+.custom-search-button {
+  height: 30px;
+  background-color: #087990;
+}
