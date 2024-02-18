@@ -63,6 +63,10 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "home",
+    "orders",
+    "products",
+    "support",
+    "users",
     "cloudinary_storage",
     "cloudinary",
 ]
