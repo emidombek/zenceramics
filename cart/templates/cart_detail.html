@@ -1,0 +1,8 @@
+<!-- cart/cart_detail.html -->
+{% for product_id, quantity in cart.items %}
+  <!-- Display product details, fetched by product_id -->
+  <p>Product: {{ product_id }} - Quantity: {{ quantity }}</p>
+  <a href="{% url 'remove_from_cart' product_id %}">Remove</a>
+  {% empty %}
+  <p>Your cart is empty.</p>
+{% endfor %}
