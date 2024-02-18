@@ -66,10 +66,6 @@ i {
   align-items: center;
 }
 
-.search-box {
-  width: 50%;
-}
-
 /* Cards */
 .card {
   width: 18rem;
@@ -84,6 +80,11 @@ h1 {
   font-family: 'Inter', sans-serif;
   color: #343A40;
   font-weight: 200;
+}
+
+.search-box {
+  height: 30px;
+  max-width: 350px;
 }
 
 .custom-search-size {
