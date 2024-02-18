@@ -46,9 +46,8 @@ i {
 
 /* Hero Image */
 .hero-image {
-  height: 600px;
-  overflow: hidden;
-  border: none;
+  width: 100%;
+  height: auto;
 }
 
 .hero-image img {
@@ -100,10 +99,8 @@ h1 {
 }
 
 .hero-background {
-  background-size: cover;
-  background-position: center;
-  object-position: center;
-  height: 550px;
+  width: 100%;
+  height: auto;
 }
 
 .custom-search-button .bi-search {
