@@ -47,7 +47,6 @@ i {
 /* Hero Image */
 .hero-image {
   width: 100%;
-  height: auto;
 }
 
 .hero-image img {
@@ -100,7 +99,7 @@ h1 {
 
 .hero-background {
   width: 100%;
-  height: auto;
+  height: 75%;
 }
 
 .custom-search-button .bi-search {
