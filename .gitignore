@@ -11,3 +11,4 @@ venvzen
 *.sqlite3
 *.pyc
 env.py
+.DS_Store
