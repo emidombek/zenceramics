@@ -99,6 +99,10 @@ h1 {
 
 .hero-background {
   background-size: cover;
-  background-position: center top;
+  background-position: top;
   height: 500px;
+}
+
+.custom-search-button .bi-search {
+  font-size: 15px;
 }
