@@ -133,3 +133,9 @@ a:active {
   object-fit: cover;
   object-position: center bottom;
 }
+
+.custom-title {
+  font-family: 'Inter', sans-serif;
+  color: #343A40;
+  font-weight: 600;
+}
