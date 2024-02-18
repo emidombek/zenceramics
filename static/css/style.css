@@ -105,6 +105,7 @@ h1 {
 
 .custom-search-button .bi-search {
   font-size: 20px;
+  color: #343A40;
   display: inline-flex;
   align-items: center;
   justify-content: center;
