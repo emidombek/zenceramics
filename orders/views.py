@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Order, OrderItem
 from products.models import Product
@@ -36,4 +36,7 @@ def order_create(request):
     # If GET request or the form hasn't been submitted yet
     return render(request, 'orders/order_create.html', {'cart': cart_items})
 
-
+@login_required
+def order_detail(request, order_id):
+    order = get_object_or_404(Order, id=order_id, user=request.user)
+    return render(request, 'orders/order_detail.html', {'order': order})
