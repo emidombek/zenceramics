@@ -164,3 +164,9 @@ p {
   background-color: #065f6b;
   color: #ffffff;
 }
+
+.form-border {
+  border: 1px solid #cccccc;
+  padding: 20px;
+  border-radius: 3px;
+}
