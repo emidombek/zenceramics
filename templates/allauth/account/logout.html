@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
   <!-- Hero Image -->
   <div class="hero-image hero-background">
-    <img src="{% static '/images/blue_bottles.jpg' %}" alt="Hero Image" />
+    <img src="{% static '/images/wavebowlplate.jpeg' %}" alt="Hero Image" />
   </div>
 
   <!-- Silver Banner -->
@@ -14,17 +14,17 @@
     <h1 class="text-center mb-3 mt-3">Log Out</h1>
   </div>
   <div class="container mt-5">
-    <h2 class="text-center">{% trans 'Log out of your Profile' %}</h2>
-    <p class="text-center">
-      {% trans 'Are you sure you want to log out?' %}
+    <h2 class="text-center mb-4">{% trans 'Log out of your Profile' %}</h2>
+    <p class="text-center mb-4">
+      {% trans 'Come back and visit us again soon!' %}
     </p>
-
     <div class="d-flex justify-content-center">
-      <div class="col-md-4">
+      <div class="form-border">
         <form method="post" action="{% url 'account_logout' %}">
           {% csrf_token %}
-          <div class="d-grid">
-            <button type="submit" class="btn btn-secondary btn-block">{% trans 'Log Out' %}</button>
+          <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-secondary btn-sm me-2" onclick="window.history.back();">{% trans 'Back' %}</button>
+            <button type="submit" class="btn btn-custom btn-sm">{% trans 'Log Out' %}</button>
           </div>
         </form>
       </div>
