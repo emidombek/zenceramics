@@ -144,4 +144,13 @@ p {
   font-family: 'Inter', sans-serif;
   color: #6C757D;
   font-weight: 600;
+  font-size: 13px;
+}
+
+.text-primary {
+  font-family: 'Inter', sans-serif;
+  color: #6C757D;
+  font-weight: 700;
+  font-size: 13px;
+  text-decoration: none;
 }

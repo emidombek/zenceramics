@@ -42,7 +42,7 @@
           <div class="mt-3 text-center">
             <a href="{% url 'account_reset_password' %}" class="text-muted">{% trans 'Forgot Password?' %}</a>
             <p class="text-center">
-              {% blocktrans %}If you have not created an account yet, then please <a href="{{ signup_url }}" class="text-primary">sign up</a> first.{% endblocktrans %}
+              {% blocktrans %}Don't have an account yet?<a href="{{ signup_url }}" class="text-primary">Sign up</a>{% endblocktrans %}
             </p>
           </div>
         </form>
