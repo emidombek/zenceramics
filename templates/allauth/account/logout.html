@@ -1,27 +1,37 @@
-{% extends "account/base_manage.html" %}
-{% load allauth i18n %}
-{% block head_title %}
-    {% trans "Sign Out" %}
-{% endblock head_title %}
+{% extends 'base.html' %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% load static %}
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign Out" %}
-    {% endelement %}
-    <p>{% trans 'Are you sure you want to sign out?' %}</p>
-    {% url 'account_logout' as action_url %}
-    {% element form method="post" action=action_url no_visible_fields=True %}
-        {% slot body %}
-            {% csrf_token %}
-            {% if redirect_field_value %}
-                <input type="hidden"
-                       name="{{ redirect_field_name }}"
-                       value="{{ redirect_field_value }}" />
-            {% endif %}
-        {% endslot %}
-        {% slot actions %}
-            {% element button type="submit" %}
-                {% trans 'Sign Out' %}
-            {% endelement %}
-        {% endslot %}
-    {% endelement %}
-{% endblock content %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  <!-- Hero Image -->
+  <div class="hero-image hero-background">
+    <img src="{% static '/images/blue_bottles.jpg' %}" alt="Hero Image" />
+  </div>
+
+  <!-- Silver Banner -->
+  <div class="silver-banner mb-5">
+    <h1 class="text-center mb-3 mt-3">Shop Pottery</h1>
+    <div class="input-group mb-3 search-box">
+      <input type="text" class="form-control custom-search-size" placeholder="Search Products" aria-label="Search Products" />
+      <button class="btn btn-outline-secondary custom-search-button" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
+    </div>
+  </div>
+  <div class="container mt-5">
+    <h1 class="text-center">{% trans 'Log Out' %}</h1>
+    <p class="text-center">
+      {% trans 'Are you sure you want to log out?' %}
+    </p>
+
+    <div class="d-flex justify-content-center">
+      <div class="col-md-4">
+        <form method="post" action="{% url 'account_logout' %}">
+          {% csrf_token %}
+          <div class="d-grid">
+            <button type="submit" class="btn btn-secondary btn-block">{% trans 'Log Out' %}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
