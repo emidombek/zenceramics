@@ -1,34 +1,40 @@
-{% extends "account/base_entrance.html" %}
+{% extends 'base.html' %}
 {% load allauth i18n %}
+{% load widget_tweaks %}
+{% load static %}
 {% block head_title %}
-    {% trans "Signup" %}
-{% endblock head_title %}
+  {% trans 'Signup' %}
+{% endblock %}
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign Up" %}
-    {% endelement %}
-    <p>
-        {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
-    </p>
-    {% url 'account_signup' as action_url %}
-    {% element form form=form method="post" action=action_url tags="entrance,signup" %}
-        {% slot body %}
+  <!-- Hero Image -->
+  <div class="hero-image hero-background">
+    <img src="{% static '/images/flowerset.jpeg' %}" alt="Hero Image" />
+  </div>
+  <!-- Silver Banner -->
+  <div class="silver-banner mb-5">
+    <h1 class="text-center mb-3 mt-3">Sign-up with Us</h1>
+  </div>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="form-border">
+          <h2 class="text-center mb-4">{% trans 'Sign Up Details' %}</h2>
+          <!-- Form starts here -->
+          <form method="post" action="{{ action_url }}" class="needs-validation">
             {% csrf_token %}
-            {% element fields form=form unlabeled=True %}
-            {% endelement %}
-            {% if redirect_field_value %}
-                <input type="hidden"
-                       name="{{ redirect_field_name }}"
-                       value="{{ redirect_field_value }}" />
-            {% endif %}
-        {% endslot %}
-        {% slot actions %}
-            {% element button tags="prominent,signup" type="submit" %}
-                {% trans "Sign Up" %}
-            {% endelement %}
-        {% endslot %}
-    {% endelement %}
-    {% if SOCIALACCOUNT_ENABLED %}
-        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
-    {% endif %}
-{% endblock content %}
+            <div class="mb-3">{{ form.email|add_class:'form-control' }}</div>
+            <!-- Use row and col classes for password fields -->
+            <div class="row">
+              <div class="col-md-6 mb-3">{{ form.password1|add_class:'form-control' }}</div>
+              <div class="col-md-6 mb-3">{{ form.password2|add_class:'form-control' }}</div>
+            </div>
+            <div class="d-flex justify-content-end">
+              <button type="button" class="btn btn-secondary btn-sm me-2" onclick="window.history.back();">{% trans 'Back' %}</button>
+              <button type="submit" class="btn btn-custom btn-sm">{% trans 'Submit' %}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
