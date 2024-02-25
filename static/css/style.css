@@ -77,7 +77,8 @@ i {
   text-align: center;
 }
 
-h1 {
+h1,
+h2 {
   font-family: 'Inter', sans-serif;
   color: #343A40;
   font-weight: 200;
