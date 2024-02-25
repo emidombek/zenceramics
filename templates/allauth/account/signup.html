@@ -21,7 +21,7 @@
           <h2 class="text-center mb-4">{% trans 'Sign Up Details' %}</h2>
           <!-- Form starts here -->
           <form method="post" action="{% url 'account_signup' %}" class="needs-validation" data-tags="entrance,signup">
-            >{% csrf_token %}
+            {% csrf_token %}
             <!-- Display non-field errors -->
             {% if form.non_field_errors %}
               <div class="alert alert-danger" role="alert">
