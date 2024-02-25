@@ -154,3 +154,13 @@ p {
   font-size: 13px;
   text-decoration: none;
 }
+
+.btn.custom-submit {
+  background-color: #087990;
+  color: #ffffff;
+}
+
+.btn.custom-submit:hover {
+  background-color: #065f6b;
+  color: #ffffff;
+}
