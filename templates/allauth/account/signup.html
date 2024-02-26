@@ -20,7 +20,7 @@
         <div class="form-border">
           <h2 class="text-center mb-4">{% trans 'Sign Up Details' %}</h2>
           <!-- Form starts here -->
-          <form method="post" action="{% url 'account_signup' %}" data-tags="entrance,signup">
+          <form method="post" action="{% url 'account_signup' %}" novalidate>
             {% csrf_token %}
             <!-- Display non-field errors -->
             {% if form.non_field_errors %}
@@ -31,8 +31,22 @@
               </div>
             {% endif %}
 
-            <!-- Email field with error display -->
+            <!-- Username field -->
             <div class="mb-3">
+              <label for="id_username">{% trans 'Username' %}</label>
+              {{ form.username|add_class:'form-control' }}
+              {% if form.username.errors %}
+                <div class="invalid-feedback d-block">
+                  {% for error in form.username.errors %}
+                    {{ error }}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Email field -->
+            <div class="mb-3">
+              <label for="id_email">{% trans 'Email' %}</label>
               {{ form.email|add_class:'form-control' }}
               {% if form.email.errors %}
                 <div class="invalid-feedback d-block">
@@ -43,32 +57,35 @@
               {% endif %}
             </div>
 
-            <!-- Password fields with error display -->
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                {{ form.password1|add_class:'form-control' }}
-                {% if form.password1.errors %}
-                  <div class="invalid-feedback d-block">
-                    {% for error in form.password1.errors %}
-                      {{ error }}
-                    {% endfor %}
-                  </div>
-                {% endif %}
-              </div>
-              <div class="col-md-6 mb-3">
-                {{ form.password2|add_class:'form-control' }}
-                {% if form.password2.errors %}
-                  <div class="invalid-feedback d-block">
-                    {% for error in form.password2.errors %}
-                      {{ error }}
-                    {% endfor %}
-                  </div>
-                {% endif %}
-              </div>
+            <!-- Password fields -->
+            <div class="mb-3">
+              <label for="id_password1">{% trans 'Password' %}</label>
+              {{ form.password1|add_class:'form-control' }}
+              {% if form.password1.errors %}
+                <div class="invalid-feedback d-block">
+                  {% for error in form.password1.errors %}
+                    {{ error }}
+                  {% endfor %}
+                </div>
+              {% endif %}
             </div>
+
+            <div class="mb-3">
+              <label for="id_password2">{% trans 'Password (again)' %}</label>
+              {{ form.password2|add_class:'form-control' }}
+              {% if form.password2.errors %}
+                <div class="invalid-feedback d-block">
+                  {% for error in form.password2.errors %}
+                    {{ error }}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Submit button -->
             <div class="d-flex justify-content-end">
               <button type="button" class="btn btn-secondary btn-sm me-2" onclick="window.history.back();">{% trans 'Back' %}</button>
-              <button type="submit" class="btn btn-custom btn-sm">{% trans 'Submit' %}</button>
+              <button type="submit" class="btn btn-custom-submit btn-sm">{% trans 'Submit' %}</button>
             </div>
           </form>
         </div>
