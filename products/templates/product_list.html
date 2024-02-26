@@ -19,7 +19,7 @@
     <div class="row justify-content-center">
       {% for product in products %}
         <div class="col-md-4 mb-4">
-          <div class="card product-card-container">
+          <div class="card mx-auto product-card-container">
             <!-- Use product.image.url to access the Cloudinary image URL -->
             {% if product.image %}
               <img src="{{ product.image.url }}" class="card-img-bottom custom-product-card" alt="{{ product.name }}" />
@@ -30,7 +30,9 @@
             <div class="card-body">
               <h5 class="card-title">{{ product.name }}</h5>
               <p class="card-text">{{ product.description }}</p>
-              <a href="#" class="btn btn-light">Add to Cart</a>
+              <div class="text-end">
+                <a href="#" class="btn btn-light">Add to Cart</a>
+              </div>
             </div>
           </div>
         </div>
@@ -38,7 +40,7 @@
     </div>
   </div>
   <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
+    <ul class="pagination mx-auto justify-content-center">
       {% if products.has_previous %}
         <li class="page-item">
           <a class="page-link" href="?page={{ products.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo; Previous</span></a>
