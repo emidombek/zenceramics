@@ -15,14 +15,14 @@
       <button class="btn btn-outline-secondary custom-search-button" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
     </div>
   </div>
-  <div class="container mt-4">
+  <div class="container mt-4 justify-content-center">
     <div class="row justify-content-center">
       {% for product in products %}
         <div class="col-md-4 mb-4">
-          <div class="card">
+          <div class="card product-card-container">
             <!-- Use product.image.url to access the Cloudinary image URL -->
             {% if product.image %}
-              <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" />
+              <img src="{{ product.image.url }}" class="card-img-bottom custom-product-card" alt="{{ product.name }}" />
             {% else %}
               <!-- Optionally, include a fallback image if product.image is not available -->
               <img src="{% static '/images/plate_teapot.jpg' %}" class="card-img-bottom custom-product-card" alt="Default Image" />
@@ -37,4 +37,39 @@
       {% endfor %}
     </div>
   </div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      {% if products.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ products.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo; Previous</span></a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">&laquo; Previous</span>
+        </li>
+      {% endif %}
+
+      {% for num in products.paginator.page_range %}
+        {% if products.number == num %}
+          <li class="page-item active">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+          </li>
+        {% else %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {% if products.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ products.next_page_number }}" aria-label="Next"><span aria-hidden="true">Next &raquo;</span></a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">Next &raquo;</span>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
 {% endblock %}

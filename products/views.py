@@ -7,6 +7,7 @@ class ProductListView(ListView):
     model = Product
     template_name = 'product_list.html'
     context_object_name = 'products'
+    paginate_by = 10  # Display 10 products per page
 
 class ProductDetailView(DetailView):
     model = Product

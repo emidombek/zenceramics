@@ -180,3 +180,7 @@ p {
 .custom-product-card {
   overflow: hidden;
 }
+
+.product-card-container {
+  margin: auto;
+}
