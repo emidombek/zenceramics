@@ -170,3 +170,13 @@ p {
   padding: 20px;
   border-radius: 3px;
 }
+
+.custom-product-card img {
+  height: 192px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.custom-product-card {
+  overflow: hidden;
+}

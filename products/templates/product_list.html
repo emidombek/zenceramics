@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load cloudinary %}
 {% block content %}
   <!-- Hero Image -->
   <div class="hero-image hero-background">
@@ -15,23 +16,25 @@
     </div>
   </div>
   <div class="container mt-4">
-    <!-- Start a new row for the products -->
-    <div class="row">
+    <div class="row justify-content-center">
       {% for product in products %}
-        <!-- Each product takes up 4 columns in the 12-column grid, for 3 per row -->
         <div class="col-md-4 mb-4">
           <div class="card">
-            <!-- Assuming 'product.image_url' is the path to the product's image -->
-            <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}" />
+            <!-- Use product.image.url to access the Cloudinary image URL -->
+            {% if product.image %}
+              <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" />
+            {% else %}
+              <!-- Optionally, include a fallback image if product.image is not available -->
+              <img src="{% static '/images/plate_teapot.jpg' %}" class="card-img-bottom custom-product-card" alt="Default Image" />
+            {% endif %}
             <div class="card-body">
               <h5 class="card-title">{{ product.name }}</h5>
               <p class="card-text">{{ product.description }}</p>
-              <!-- Link for 'Add to Cart' action needs to be implemented -->
               <a href="#" class="btn btn-light">Add to Cart</a>
             </div>
           </div>
         </div>
       {% endfor %}
-    </div> <!-- End row -->
+    </div>
   </div>
 {% endblock %}
