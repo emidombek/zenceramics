@@ -1,13 +1,37 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-  <h1>Products</h1>
-  <div class="product-list">
-    {% for product in products %}
-      <div class="product">
-        <h2><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></h2>
-        <p>{{ product.description }}</p>
-        <!-- More product details -->
-      </div>
-    {% endfor %}
+  <!-- Hero Image -->
+  <div class="hero-image hero-background">
+    <img src="{% static '/images/paintplate.jpg' %}" alt="Hero Image" />
+  </div>
+
+  <!-- Silver Banner -->
+  <div class="silver-banner mb-5">
+    <h1 class="text-center mb-3 mt-3">Our Products</h1>
+    <div class="input-group mb-3 search-box">
+      <input type="text" class="form-control custom-search-size" placeholder="Search Products" aria-label="Search Products" />
+      <button class="btn btn-outline-secondary custom-search-button" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
+    </div>
+  </div>
+  <div class="container mt-4">
+    <!-- Start a new row for the products -->
+    <div class="row">
+      {% for product in products %}
+        <!-- Each product takes up 4 columns in the 12-column grid, for 3 per row -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <!-- Assuming 'product.image_url' is the path to the product's image -->
+            <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}" />
+            <div class="card-body">
+              <h5 class="card-title">{{ product.name }}</h5>
+              <p class="card-text">{{ product.description }}</p>
+              <!-- Link for 'Add to Cart' action needs to be implemented -->
+              <a href="#" class="btn btn-light">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div> <!-- End row -->
   </div>
 {% endblock %}
