@@ -12,7 +12,7 @@
     <h1 class="text-center mb-3 mt-3">Our Products</h1>
     <div class="input-group mb-3 search-box">
       <input type="text" class="form-control custom-search-size" placeholder="Search Products" aria-label="Search Products" />
-      <button class="btn btn-outline-secondary custom-search-button" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
+      <button class="btn btn-outline-secondary custom-search-button" type="button" id="button-addon2"><i class="bi bi-search mx-auto"></i></button>
     </div>
   </div>
   <div class="container mt-4 justify-content-center">
@@ -30,8 +30,12 @@
             <div class="card-body">
               <h5 class="card-title">{{ product.name }}</h5>
               <p class="card-text">{{ product.description }}</p>
-              <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
-              <div class="text-end">
+              <p class="card-text">
+                <strong>Price:</strong> ${{ product.price }}
+              </p>
+              <div class="d-flex justify-content-end">
+                <a href="#" class="btn btn-custom-submit ms-2">View Details</a>
+                <!-- Add to Cart Button -->
                 <a href="#" class="btn btn-light">Add to Cart</a>
               </div>
             </div>
