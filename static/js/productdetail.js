@@ -7,11 +7,11 @@ function showProductDetails(button) {
 
   // Populate modal with product details
   document.getElementById('modalProductName').textContent = name;
-  document.getElementById('modalProductImage').src = image || '{% static "/images/placeholder.png" %}'; // Fallback image
+  document.getElementById('modalProductImage').src = image || 'static/images/plate_teapot.jpg';
   document.getElementById('modalProductDescription').textContent = description;
   document.getElementById('modalProductPrice').textContent = `Price: $${price}`;
 
   // Show the modal
-  var productDetailsModal = new bootstrap.Modal(document.getElementById('productDetailsModal'), {});
+  let productDetailsModal = new bootstrap.Modal(document.getElementById('productDetailsModal'));
   productDetailsModal.show();
 }
