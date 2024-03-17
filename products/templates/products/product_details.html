@@ -1,7 +1,20 @@
-{% extends 'base.html' %}
-{% block content %}
-  <div class="product-detail">
-    <h1>{{ product.name }}</h1>
-    <!-- Display the product's details -->
+<!-- Product Details Modal -->
+<div class="modal fade" id="productDetailsModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalProductName">Product Name</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img id="modalProductImage" src="" class="img-fluid" alt="Product Image" />
+        <p id="modalProductDescription"></p>
+        <p id="modalProductPrice"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add to Cart</button>
+      </div>
+    </div>
   </div>
-{% endblock %}
+</div>
