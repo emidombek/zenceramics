@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import ListView
-from django.views.generic import DetailView
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 from .models import Product
+
 
 class ProductListView(ListView):
     model = Product
@@ -17,7 +19,17 @@ class ProductListView(ListView):
             queryset = queryset.filter(category__iexact=category)
         return queryset
 
-class ProductDetailView(DetailView):
-    model = Product
-    template_name = 'products/product_detail.html'
-    context_object_name = 'product'
+def ProductDetailView(request, product_id):
+    # Get the product, or return a 404 if not found
+    product = get_object_or_404(Product, id=product_id)
+
+    # Prepare the data to be returned
+    data = {
+        'name': product.name,
+        'image': product.image.url if product.image else None,  # Handles the case where there might not be an image
+        'description': product.description,
+        'price': str(product.price),  # Ensure the price is in a serializable format
+    }
+
+    # Return the data as JSON
+    return JsonResponse(data)
