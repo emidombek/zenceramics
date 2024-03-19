@@ -20,16 +20,11 @@ class ProductListView(ListView):
         return queryset
 
 def ProductDetailView(request, product_id):
-    # Get the product, or return a 404 if not found
-    product = get_object_or_404(Product, id=product_id)
-
-    # Prepare the data to be returned
-    data = {
+    product = get_object_or_404(Product, pk=product_id)
+    response_data = {
         'name': product.name,
-        'image': product.image.url if product.image else None,  # Handles the case where there might not be an image
+        'image': product.image.url if product.image else None,
         'description': product.description,
-        'price': str(product.price),  # Ensure the price is in a serializable format
+        'price': product.price,
     }
-
-    # Return the data as JSON
-    return JsonResponse(data)
+    return JsonResponse(response_data)
