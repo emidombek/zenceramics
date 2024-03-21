@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     "home",
     "orders",
     "products",
+    "cart",
     "support",
     "users",
     "cloudinary_storage",

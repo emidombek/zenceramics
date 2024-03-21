@@ -103,7 +103,12 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="bi bi-cart"></i></a>
+              <a class="nav-link" href="{% url 'cart_view' %}">
+                <i class="bi bi-cart"></i>
+                {% if cart_count %}
+                  <span class="badge bg-primary">{{ cart_count }}</span>
+                {% endif %}
+              </a>
             </li>
           </ul>
         </div>

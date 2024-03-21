@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from .utils import add_to_cart, get_cart, remove_from_cart
-from .models import Product
+from products.models import Product
 
 def cart_view(request):
     cart = request.session.get('cart', {})
@@ -17,7 +17,7 @@ def cart_view(request):
             'price': product.price,
             'quantity': quantity,
             'total_item_price': total_item_price,
-            'image_url': product.image.url if product.image else None,  # Assuming you have an image field
+            'image_url': product.image.url if product.image else None,  
         })
 
     return render(request, 'cart/cart_detail.html', {'cart_items': detailed_cart_items, 'total_price': total_price})
