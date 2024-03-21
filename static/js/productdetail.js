@@ -1,14 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Attach event listener to all "View Details" links
-  let viewDetailsLinks = document.querySelectorAll('.viewDetailsLink');
-  viewDetailsLinks.forEach(function (link) {
-    link.addEventListener('click', function (event) {
-      event.preventDefault(); // Prevent the default action of following the link
+  // Attach event listener to all "View Details" buttons
+  let viewDetailsButtons = document.querySelectorAll('.viewDetailsButton');
+  viewDetailsButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      // Prevent the default action of the button
+      event.preventDefault();
 
+      // Retrieve the product ID from the button's data attribute
       let productId = this.dataset.productId;
 
       // Make AJAX request to fetch product details
-      fetch(`/product-details/${productId}/`)
+      fetch(`/products/product-details/${productId}/`)
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
