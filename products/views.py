@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.db.models import Q
 from django.views.generic import ListView
 from django.http import JsonResponse
+from django.views import View
 from django.shortcuts import get_object_or_404
 from .models import Product
 
@@ -31,12 +32,17 @@ class ProductListView(ListView):
 
         return queryset
 
-def ProductDetailView(request, product_id):
-    product = get_object_or_404(Product, pk=product_id)
-    response_data = {
-        'name': product.name,
-        'image': product.image.url if product.image else None,
-        'description': product.description,
-        'price': product.price,
-    }
-    return JsonResponse(response_data)
+class ProductDetailView(View):
+    def get(self, request, product_id):
+        product = get_object_or_404(Product, pk=product_id)
+        product_data = {
+            'name': product.name,
+            'description': product.description,
+            'price': product.price,
+            'category': product.category,
+            'inventory': product.inventory,
+            'image': product.image.url if product.image else None,
+            'created_at': product.created_at,
+            'updated_at': product.updated_at,
+        }
+        return JsonResponse(product_data)
