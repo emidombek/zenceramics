@@ -11,10 +11,12 @@
   <!-- Silver Banner -->
   <div class="silver-banner mb-5">
     <h1 class="text-center mb-3 mt-3">Our Products</h1>
-    <div class="input-group mb-3 search-box">
-      <input type="text" class="form-control custom-search-size" placeholder="Search Products" aria-label="Search Products" />
-      <button class="btn btn-outline-secondary custom-search-button" type="button" id="button-addon2"><i class="bi bi-search mx-auto"></i></button>
-    </div>
+    <form action="{% url 'products:product_list' %}" method="get">
+      <div class="input-group mb-3 search-box">
+        <input type="text" name="q" class="form-control custom-search-size" placeholder="Search Products" aria-label="Search Products" />
+        <button class="btn btn-outline-secondary custom-search-button" type="submit" id="button-addon2"><i class="bi bi-search mx-auto"></i></button>
+      </div>
+    </form>
   </div>
   <div class="container mt-4 justify-content-center">
     <div class="row justify-content-center">
