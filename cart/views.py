@@ -1,10 +1,26 @@
 from django.shortcuts import redirect, render
 from .utils import add_to_cart, get_cart, remove_from_cart
+from .models import Product
 
 def cart_view(request):
-    cart = get_cart(request)
-    # Optionally, resolve product IDs to actual Product instances to display more info
-    return render(request, 'cart/cart_detail.html', {'cart': cart})
+    cart = request.session.get('cart', {})
+    detailed_cart_items = []
+    total_price = 0
+
+    for product_id, quantity in cart.items():
+        product = Product.objects.get(id=product_id)
+        total_item_price = product.price * quantity
+        total_price += total_item_price
+        detailed_cart_items.append({
+            'product_id': product_id,
+            'name': product.name,
+            'price': product.price,
+            'quantity': quantity,
+            'total_item_price': total_item_price,
+            'image_url': product.image.url if product.image else None,  # Assuming you have an image field
+        })
+
+    return render(request, 'cart/cart_detail.html', {'cart_items': detailed_cart_items, 'total_price': total_price})
 
 def add_to_cart_view(request, product_id):
     # This is a simplified add check for product existence, etc later on.

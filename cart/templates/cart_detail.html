@@ -1,8 +1,54 @@
-<!-- cart/cart_detail.html -->
-{% for product_id, quantity in cart.items %}
-  <!-- Display product details, fetched by product_id -->
-  <p>Product: {{ product_id }} - Quantity: {{ quantity }}</p>
-  <a href="{% url 'remove_from_cart' product_id %}">Remove</a>
-  {% empty %}
-  <p>Your cart is empty.</p>
-{% endfor %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2>Shopping Cart</h2>
+    {% if cart_items %}
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Total</th>
+              <th scope="col">Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart_items %}
+              <tr>
+                <td>
+                  <img src="{{ item.image_url }}" alt="{{ item.name }}" style="width: 50px; height: auto;" />
+                  {{ item.name }}
+                </td>
+                <td>${{ item.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.total_item_price }}</td>
+                <td>
+                  <form action="{% url 'remove_from_cart' item.product_id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex justify-content-end">
+        <h4>Total: ${{ total_price }}</h4>
+      </div>
+      <!-- Additional Actions -->
+      <div class="d-flex justify-content-between mt-3">
+        <a href="{% url 'products:product_list' %}" class="btn btn-outline-secondary">Continue Shopping</a>
+        <a href="#" class="btn btn-primary">Proceed to Checkout</a>
+      </div>
+    {% else %}
+      <p>
+        Your cart is empty. <a href="{% url 'products:product_list' %}">Start shopping</a>.
+      </p>
+    {% endif %}
+  </div>
+{% endblock %}
