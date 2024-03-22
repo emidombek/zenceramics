@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   // Load modal HTML dynamically
-  fetch('/products/templates/products/product_details.html')
+  fetch('products/product_details.html')
     .then(response => {
       if (!response.ok) {
         throw new Error('Failed to load modal HTML');
