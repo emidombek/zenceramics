@@ -2,19 +2,31 @@
 {% load static %}
 {% block content %}
   <div class="hero-image hero-background">
-    <img src="{% static '/images/blue_bottles.jpg' %}" alt="Hero Image" />
+    <img src="{% static '/images/craftsman.jpg' %}" alt="Hero Image" class="img-fluid" />
   </div>
 
   <!-- Silver Banner -->
-  <div class="silver-banner mb-5">
-    <h1 class="text-center mb-3 mt-3">Our Mission</h1>
+  <div class="silver-banner text-center mb-5">
+    <h1 class="mb-3 mt-3">Our Mission</h1>
   </div>
-  <img src="{% static 'path/to/your/photo.jpg' %}" alt="Our Mission" class="img-fluid mb-3 mx-auto d-block" />
-  <h2 class="text-center mb-3 mt-3">Our Process</h2>
-  <p class="text-center">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
-  <div class="text-center">
-    <a href="{% url 'products:product_list' %}" class="btn btn-primary">View Our Products</a>
-    <a href="#" class="btn btn-secondary">Get in Touch</a>
+  <!-- Central Column for Content -->
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2 class="text-center mb-3">Our Process</h2>
+        <p class="text-center">At Zen Ceramics, we believe in the harmony of handcrafted artistry and practical design. Our journey begins with the careful selection of natural clay, sourced from renowned locales known for their exceptional quality. This clay serves as the canvas for our creations - a range of tableware, mugs, vases, and incense holders that blend traditional techniques with contemporary aesthetics.</p>
+        <img src="{% static '/images/shop.jpg' %}" alt="Our Mission" class="img-fluid mb-3 mx-auto d-block" />
+        <p class="text-center">Our artisans, skilled in age-old pottery techniques, imbue life into each creation. The process is a dance of precision and creativity: shaping, throwing, and trimming the clay on the wheel, followed by a meticulous hand-finishing that ensures every piece is unique. We celebrate the individuality of each item, where slight variations are not flaws, but testaments to the artisan's touch.</p>
+        <p class="text-center">Glazing is a crucial step where we play with colors and textures, often inspired by the serene beauty of nature. Our glazes are mixed in-house, allowing us to experiment and create a palette that echoes the tranquility and simplicity of our brand ethos. The final transformation occurs in our kilns, where the fusion of heat and artistry solidifies the clay into durable, functional art. This high-temperature firing not only strengthens the pottery but also brings out the vibrant hues and delicate nuances of the glazes.</p>
+        <p class="text-center">The final transformation occurs in our kilns, where the fusion of heat and artistry solidifies the clay into durable, functional art. This high-temperature firing not only strengthens the pottery but also brings out the vibrant hues and delicate nuances of the glazes.</p>
+        <!-- Buttons centered within the same column -->
+        <div class="text-center mt-4">
+          <a href="{% url 'products:product_list' %}" class="btn btn-primary me-2">View Our Products</a>
+          <br />
+          <a href="#" class="btn btn-secondary mt-3">Get in Touch</a>
+        </div>
+      </div>
+    </div>
   </div>
 {% endblock %}
