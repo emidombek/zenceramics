@@ -39,7 +39,7 @@
               <div class="d-flex justify-content-end">
                 <button type="button" class="btn btn-light ms-2 viewDetailsButton" data-name="{{ product.name }}" data-image="{{ product.image.url }}" data-description="{{ product.description }}" data-price="{{ product.price }}" data-product-id="{{ product.id }}">View Details</button>
                 <!-- Add to Cart Button -->
-                <a href="#" class="btn btn-light">Add to Cart</a>
+                <a href="{% url 'add_to_cart' product.id %}" class="btn btn-light ms-2">Add to Cart</a>
               </div>
             </div>
           </div>

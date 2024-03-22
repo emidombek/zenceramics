@@ -2,8 +2,13 @@
 {% load static %}
 
 {% block content %}
+  <div class="hero-image hero-background">
+    <img src="{% static '/images/paintplate.png' %}" alt="Hero Image" />
+  </div>
+  <div class="silver-banner mb-5">
+    <h1 class="text-center mb-3 mt-3">Shopping Cart</h1>
+  </div>
   <div class="container mt-4">
-    <h2>Shopping Cart</h2>
     {% if cart_items %}
       <div class="table-responsive">
         <table class="table">
@@ -42,13 +47,19 @@
       </div>
       <!-- Additional Actions -->
       <div class="d-flex justify-content-between mt-3">
-        <a href="{% url 'products:product_list' %}" class="btn btn-outline-secondary">Continue Shopping</a>
-        <a href="#" class="btn btn-primary">Proceed to Checkout</a>
+        <a href="{% url 'products:product_list' %}" class="btn btn-outline-light">Continue Shopping</a>
+        <a href="#" class="btn btn-light">Proceed to Checkout</a>
       </div>
     {% else %}
-      <p>
-        Your cart is empty. <a href="{% url 'products:product_list' %}">Start shopping</a>.
-      </p>
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-md-6 text-center">
+            <p class="py-4">
+              Your cart is empty. <a href="{% url 'products:product_list' %}">Start shopping</a>.
+            </p>
+          </div>
+        </div>
+      </div>
     {% endif %}
   </div>
 {% endblock %}
