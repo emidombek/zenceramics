@@ -1,24 +1,20 @@
-{% extends 'base.html' %} <!-- Assuming you're extending a base template -->
+{% extends 'base.html' %}
+{% load static %}
 {% block content %}
-  <div class="container mt-4">
-    <h2>Our Mission</h2>
-    <p>
-      <!-- Insert your mission statement here -->
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </p>
-    <!-- Placeholder for the photo -->
-    <img src="{% static 'path/to/your/photo.jpg' %}" alt="Our Mission" class="img-fluid mb-3" />
-    <h2>Our Process</h2>
-    <p>
-      <!-- Insert information about your process here -->
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
-    <!-- Buttons -->
-    <div class="mb-3">
-      <a href="{% url 'products:product_list' %}" class="btn btn-primary">View Our Products</a>
-    </div>
-    <div>
-      <a href="{% url 'contact' %}" class="btn btn-secondary">Get in Touch</a>
-    </div>
+  <div class="hero-image hero-background">
+    <img src="{% static '/images/blue_bottles.jpg' %}" alt="Hero Image" />
+  </div>
+
+  <!-- Silver Banner -->
+  <div class="silver-banner mb-5">
+    <h1 class="text-center mb-3 mt-3">Our Mission</h1>
+  </div>
+  <img src="{% static 'path/to/your/photo.jpg' %}" alt="Our Mission" class="img-fluid mb-3 mx-auto d-block" />
+  <h2 class="text-center mb-3 mt-3">Our Process</h2>
+  <p class="text-center">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+  <div class="text-center">
+    <a href="{% url 'products:product_list' %}" class="btn btn-primary">View Our Products</a>
+    <a href="#" class="btn btn-secondary">Get in Touch</a>
   </div>
 {% endblock %}
