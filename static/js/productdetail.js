@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Attach event listener to all "View Details" buttons
+  // Select all "View Details" buttons
   let viewDetailsButtons = document.querySelectorAll('.viewDetailsButton');
+
+  // Iterate over each button and attach an event listener
   viewDetailsButtons.forEach(function (button) {
     button.addEventListener('click', function (event) {
       // Prevent the default action of the button
@@ -9,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // Retrieve the product ID from the button's data attribute
       let productId = this.dataset.productId;
 
-      // Make AJAX request to fetch product details
+      // Make an AJAX request to fetch product details based on the product ID
       fetch(`/products/product-details/${productId}/`)
         .then(response => {
           if (!response.ok) {
@@ -20,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
           console.log('AJAX request successful. Response:', data);
 
-          // Update modal with fetched product details
+          // Update the modal with fetched product details
           let modalProductName = document.getElementById('modalProductName');
           let modalProductImage = document.getElementById('modalProductImage');
           let modalProductDescription = document.getElementById('modalProductDescription');
