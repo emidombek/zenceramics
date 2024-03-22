@@ -1,0 +1,24 @@
+{% extends 'base.html' %} <!-- Assuming you're extending a base template -->
+{% block content %}
+  <div class="container mt-4">
+    <h2>Our Mission</h2>
+    <p>
+      <!-- Insert your mission statement here -->
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </p>
+    <!-- Placeholder for the photo -->
+    <img src="{% static 'path/to/your/photo.jpg' %}" alt="Our Mission" class="img-fluid mb-3" />
+    <h2>Our Process</h2>
+    <p>
+      <!-- Insert information about your process here -->
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+    <!-- Buttons -->
+    <div class="mb-3">
+      <a href="{% url 'products:product_list' %}" class="btn btn-primary">View Our Products</a>
+    </div>
+    <div>
+      <a href="{% url 'contact' %}" class="btn btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+{% endblock %}
