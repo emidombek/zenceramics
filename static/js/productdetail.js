@@ -1,40 +1,34 @@
-$(function () {
-  // Attach event listeners to "View Details" buttons as soon as the DOM is fully loaded
-  $('.viewDetailsButton').each(function () {
-    $(this).on('click', function (event) {
-      // Prevent the default action
-      event.preventDefault();
-
-      // Retrieve the product ID from the button's data attribute
-      let productId = $(this).data('productId');
-
-      // Fetch and display the product details modal using the retrieved product ID
-      fetchProductDetails(productId);
-    });
-  });
+document.addEventListener('DOMContentLoaded', function () {
+  // This ensures the script runs after the entire page is loaded.
+  bindViewDetailsButtons();
 });
 
-function fetchProductDetails(productId) {
-  $.ajax({
-    url: `/products/product-details/${productId}/`,
-    type: 'GET',
-    success: function (data) {
-      console.log('AJAX request successful. Response:', data);
-      updateAndShowModal(data);
-    },
-    error: function (jqXHR, textStatus, errorThrown) {
-      console.error('Fetch error:', textStatus, errorThrown);
-    }
+function bindViewDetailsButtons() {
+  document.querySelectorAll('.viewDetailsButton').forEach(function (button) {
+    button.addEventListener('click', function (event) {
+      event.preventDefault(); // Prevent the default action
+
+      // Retrieve product details from data attributes
+      let productId = this.getAttribute('data-product-id');
+      let productName = this.getAttribute('data-name');
+      let productImage = this.getAttribute('data-image');
+      let productDescription = this.getAttribute('data-description');
+      let productPrice = this.getAttribute('data-price');
+
+      // Populate and show the modal
+      populateAndShowModal(productId, productName, productImage, productDescription, productPrice);
+    });
   });
 }
 
-function updateAndShowModal(data) {
-  // Update modal content
-  $('#modalProductName').text(data.name);
-  $('#modalProductImage').attr('src', data.image || '/path/to/default/image.jpg');
-  $('#modalProductDescription').text(data.description);
-  $('#modalProductPrice').text(`Price: $${data.price}`);
+function populateAndShowModal(productId, name, image, description, price) {
+  // Populate modal content
+  document.getElementById('modalProductName').textContent = name;
+  document.getElementById('modalProductImage').src = image || '/path/to/default/image.jpg';
+  document.getElementById('modalProductDescription').textContent = description;
+  document.getElementById('modalProductPrice').textContent = `Price: $${price}`;
 
-  // Show the modal using Bootstrap's modal method
-  $('#productDetailsModal').modal('show');
+  // Show the modal using Bootstrap 5's native JavaScript API
+  var productDetailsModal = new bootstrap.Modal(document.getElementById('productDetailsModal'));
+  productDetailsModal.show();
 }
