@@ -11,10 +11,8 @@ body {
 }
 
 .footer-custom {
-  position: absolute;
   background-color: #087990;
   color: white;
-  text-align: center;
   padding: 10px;
 }
 
