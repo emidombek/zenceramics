@@ -1,34 +1,56 @@
 {% extends 'base.html' %}
 
+{% load static %}
 {% load widget_tweaks %}
 
 {% block content %}
-  <h2>Contact Support</h2>
-
+  <div class="hero-image hero-background">
+    <img src="{% static 'images/teapot.jpg' %}" alt="Hero Image" class="img-fluid" />
+  </div>
+  <!-- Silver Banner -->
+  <div class="silver-banner text-center mb-5">
+    <h1 class="mb-3 mt-3">Contact Us</h1>
+    <p class="text-center">We'd love to hear from you! Whether you have a question about our products, want to discuss a custom order, or just want to share your thoughts, please feel free to get in touch.</p>
+  </div>
   {% if messages %}
-    <ul class="messages">
-      {% for message in messages %}
-        <li class="{{ message.tags|default:'' }}">{{ message }}</li>
-      {% endfor %}
-    </ul>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="text-center mb-3">Get in Touch!</h2>
+
+          <ul class="messages">
+            {% for message in messages %}
+              <li class="{{ message.tags|default:'' }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
   {% endif %}
 
-  <form method="post" class="needs-validation" novalidate>
-    {% csrf_token %}
-    {% for field in form %}
-      <div class="mb-3">
-        {{ field.label_tag }}
-        {{ field|add_class:'form-control' }}
-        {% if field.help_text %}
-          <small class="form-text text-muted">{{ field.help_text }}</small>
-        {% endif %}
-        {% if field.errors %}
-          {% for error in field.errors %}
-            <div class="invalid-feedback">{{ error }}</div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <!-- Adjust the column size as needed -->
+        <form method="post" class="needs-validation" novalidate>
+          {% csrf_token %}
+          {% for field in form %}
+            <div class="mb-3">
+              {{ field.label_tag }}
+              {{ field|add_class:'form-control' }}
+              {% if field.help_text %}
+                <small class="form-text text-muted">{{ field.help_text }}</small>
+              {% endif %}
+              {% if field.errors %}
+                {% for error in field.errors %}
+                  <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+              {% endif %}
+            </div>
           {% endfor %}
-        {% endif %}
+          <button type="submit" class="btn btn-primary">Send</button>
+        </form>
       </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-primary">Send</button>
-  </form>
+    </div>
+  </div>
 {% endblock %}
