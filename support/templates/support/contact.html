@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h2>Contact Support</h2>
+
+  {% for message in messages %}
+    <li class="{{ message.tags|default:'' }}">{{ message }}</li>
+  {% endfor %}
+
+  <form method="post" class="needs-validation" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">Send</button>
+  </form>
+{% endblock %}
