@@ -28,7 +28,13 @@ function populateAndShowModal(productId, name, image, description, price) {
   document.getElementById('modalProductDescription').textContent = description;
   document.getElementById('modalProductPrice').textContent = `Price: $${price}`;
 
-  // Show the modal using Bootstrap 5's native JavaScript API
-  var productDetailsModal = new bootstrap.Modal(document.getElementById('productDetailsModal'));
+  // Show the modal using Bootstrap 5's native JavaScript API with explicit options
+  const modalElement = document.getElementById('productDetailsModal');
+  const modalOptions = {
+    backdrop: 'static',
+    keyboard: true,
+    focus: true
+  };
+  const productDetailsModal = new bootstrap.Modal(modalElement, modalOptions);
   productDetailsModal.show();
 }
