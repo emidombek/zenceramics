@@ -34,7 +34,7 @@ function bindViewDetailsButtons() {
 } // This closing brace matches the opening brace of the function bindViewDetailsButtons
 
 function populateAndShowModal(productId, name, image, description, price) {
-  console.log('Initializing modal for Product ID:', productId); // Log before initializing modal
+  console.log('Initializing modal for Product ID:', productId);
 
   const modalElement = document.getElementById('productDetailsModal');
   if (modalElement) {
@@ -44,6 +44,12 @@ function populateAndShowModal(productId, name, image, description, price) {
       keyboard: true,
       focus: true
     };
+
+    document.getElementById('modalProductName').textContent = name;
+    document.getElementById('modalProductImage').src = image || '/path/to/default/image.jpg';
+    document.getElementById('modalProductDescription').textContent = description;
+    document.getElementById('modalProductPrice').textContent = `Price: $${price}`;
+
     const productDetailsModal = new bootstrap.Modal(modalElement, modalOptions);
     productDetailsModal.show();
   } else {
