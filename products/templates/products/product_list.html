@@ -38,7 +38,7 @@
               <div class="d-flex justify-content-end">
                 <a href="#productDetailsModal" class="btn btn-light ms-2 viewDetailsButton" aria-label="Link to product detail popup" data-bs-target="#productDetailsModal" data-product-id="{{ product.id }}" data-name="{{ product.name }}" data-image="{{ product.image.url }}" data-description="{{ product.description }}" data-price="{{ product.price }}">View Details</a>
                 <!-- Add to Cart Button -->
-                <a href="{% url 'add_to_cart' product.id %}" class="btn btn-secondary ms-2">Add to Cart</a>
+                <a id="modalAddToCartButton" href="#" class="btn btn-secondary ms-2">Add to Cart</a>
               </div>
             </div>
           </div>

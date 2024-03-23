@@ -50,6 +50,9 @@ function populateAndShowModal(productId, name, image, description, price) {
     document.getElementById('modalProductDescription').textContent = description;
     document.getElementById('modalProductPrice').textContent = `Price: $${price}`;
 
+    const addToCartButton = document.getElementById('modalAddToCartButton');
+    addToCartButton.href = `cart/add/<int:product_id>/`;
+
     const productDetailsModal = new bootstrap.Modal(modalElement, modalOptions);
     productDetailsModal.show();
   } else {
