@@ -11,11 +11,9 @@
   <div class="silver-banner text-center mb-5">
     <h1 class="mb-3 mt-3">Contact Us</h1>
   </div>
-
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8 bg-white shadow-sm p-4 mb-5 rounded">
-        <!-- Add Bootstrap classes here for styling -->
         <h2 class="text-center mb-3">Get in Touch</h2>
         <p class="text-center">
           We'd love to hear from you! Whether you have a question about our products,
@@ -30,22 +28,26 @@
           </ul>
         {% endif %}
 
+        {% if form.errors %}
+          <div class="alert alert-danger" role="alert">Please correct the errors below.</div>
+        {% endif %}
+
         <form method="post" class="needs-validation" novalidate>
           {% csrf_token %}
+
           {% for field in form %}
-            <div class="mb-3">
+            <div class="mb-3 {% if field.errors %}{% endif %}">
               {{ field.label_tag }}
               {{ field|add_class:'form-control' }}
               {% if field.help_text %}
                 <small class="form-text text-muted">{{ field.help_text }}</small>
               {% endif %}
-              {% if field.errors %}
-                {% for error in field.errors %}
-                  <div class="invalid-feedback">{{ error }}</div>
-                {% endfor %}
-              {% endif %}
+              {% for error in field.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+              {% endfor %}
             </div>
           {% endfor %}
+
           <div class="d-flex justify-content-end">
             <a href="{% url 'index' %}" class="btn btn-secondary mx-1">Back</a>
             <button type="submit" class="btn btn-primary">Send</button>
