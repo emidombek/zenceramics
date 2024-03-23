@@ -10,14 +10,17 @@
   <!-- Silver Banner -->
   <div class="silver-banner text-center mb-5">
     <h1 class="mb-3 mt-3">Contact Us</h1>
-    <p class="text-center">We'd love to hear from you! Whether you have a question about our products, want to discuss a custom order, or just want to share your thoughts, please feel free to get in touch.</p>
   </div>
+  <h2 class="text-center mb-3">Get in Touch</h2>
+  <p class="text-center">
+    We'd love to hear from you! Whether you have a question about our products,
+    <br /> want to discuss a custom order, or just want to share your thoughts,
+    <br />please feel free to get in touch.
+  </p>
   {% if messages %}
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8">
-          <h2 class="text-center mb-3">Get in Touch!</h2>
-
           <ul class="messages">
             {% for message in messages %}
               <li class="{{ message.tags|default:'' }}">{{ message }}</li>
@@ -48,7 +51,10 @@
               {% endif %}
             </div>
           {% endfor %}
-          <button type="submit" class="btn btn-primary">Send</button>
+          <div class="d-flex justify-content-end">
+            <a href="{% url 'index' %}" class="btn btn-secondary ms-2">Back</a>
+            <button type="submit" class="btn btn-primary">Send</button>
+          </div>
         </form>
       </div>
     </div>
