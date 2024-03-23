@@ -1,17 +1,34 @@
 {% extends 'base.html' %}
 
-{% load crispy_forms_tags %}
+{% load widget_tweaks %}
 
 {% block content %}
   <h2>Contact Support</h2>
 
-  {% for message in messages %}
-    <li class="{{ message.tags|default:'' }}">{{ message }}</li>
-  {% endfor %}
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li class="{{ message.tags|default:'' }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 
   <form method="post" class="needs-validation" novalidate>
     {% csrf_token %}
-    {{ form|crispy }}
+    {% for field in form %}
+      <div class="mb-3">
+        {{ field.label_tag }}
+        {{ field|add_class:'form-control' }}
+        {% if field.help_text %}
+          <small class="form-text text-muted">{{ field.help_text }}</small>
+        {% endif %}
+        {% if field.errors %}
+          {% for error in field.errors %}
+            <div class="invalid-feedback">{{ error }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    {% endfor %}
     <button type="submit" class="btn btn-primary">Send</button>
   </form>
 {% endblock %}

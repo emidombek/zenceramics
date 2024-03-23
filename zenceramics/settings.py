@@ -49,7 +49,6 @@ ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = False
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Application definition
 
@@ -71,7 +70,6 @@ INSTALLED_APPS = [
     "users",
     "cloudinary_storage",
     "cloudinary",
-    "crispy_forms",
     "widget_tweaks",
 ]
 

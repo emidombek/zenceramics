@@ -5,7 +5,7 @@ from django.contrib import messages
 def about_view(request):
     return render(request, 'support/about.html') 
 
-def contact(request):
+def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
