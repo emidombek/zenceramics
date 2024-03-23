@@ -1,10 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // This ensures the script runs after the entire page is loaded.
+  console.log('DOM fully loaded and parsed');
   bindViewDetailsButtons();
 });
 
 function bindViewDetailsButtons() {
-  document.querySelectorAll('.viewDetailsButton').forEach(function (button) {
+  const buttons = document.querySelectorAll('.viewDetailsButton');
+  console.log(`Found ${buttons.length} '.viewDetailsButton' elements`);
+
+  buttons.forEach(button => {
     button.addEventListener('click', function (event) {
       event.preventDefault(); // Prevent the default action
 
@@ -15,26 +18,35 @@ function bindViewDetailsButtons() {
       let productDescription = this.getAttribute('data-description');
       let productPrice = this.getAttribute('data-price');
 
+      // Log each attribute to ensure they are correctly retrieved
+      console.log('Button clicked. Product Details:', {
+        ProductID: productId,
+        ProductName: productName,
+        ProductImage: productImage,
+        ProductDescription: productDescription,
+        ProductPrice: productPrice
+      });
+
       // Populate and show the modal
       populateAndShowModal(productId, productName, productImage, productDescription, productPrice);
     });
   });
-}
+} // This closing brace matches the opening brace of the function bindViewDetailsButtons
 
 function populateAndShowModal(productId, name, image, description, price) {
-  // Populate modal content
-  document.getElementById('modalProductName').textContent = name;
-  document.getElementById('modalProductImage').src = image || '/path/to/default/image.jpg';
-  document.getElementById('modalProductDescription').textContent = description;
-  document.getElementById('modalProductPrice').textContent = `Price: $${price}`;
+  console.log('Initializing modal for Product ID:', productId); // Log before initializing modal
 
-  // Show the modal using Bootstrap 5's native JavaScript API with explicit options
   const modalElement = document.getElementById('productDetailsModal');
-  const modalOptions = {
-    backdrop: 'static',
-    keyboard: true,
-    focus: true
-  };
-  const productDetailsModal = new bootstrap.Modal(modalElement, modalOptions);
-  productDetailsModal.show();
+  if (modalElement) {
+    console.log('Modal element found:', modalElement);
+    const modalOptions = {
+      backdrop: 'static',
+      keyboard: true,
+      focus: true
+    };
+    const productDetailsModal = new bootstrap.Modal(modalElement, modalOptions);
+    productDetailsModal.show();
+  } else {
+    console.log('Error: Modal element not found');
+  }
 }
