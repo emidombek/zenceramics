@@ -12,12 +12,8 @@ body {
 
 .footer-custom {
   position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 60px;
   background-color: #087990;
   color: white;
-  line-height: 40px;
   text-align: center;
   padding: 10px;
 }
