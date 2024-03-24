@@ -39,11 +39,16 @@
                 </td>
               </tr>
             {% endfor %}
+            <!-- Display the Shipping Cost -->
+            <tr class="table-secondary">
+              <td colspan="3" class="text-end">Shipping Cost:</td>
+              <td colspan="2">${{ total_shipping_cost }}</td>
+            </tr>
           </tbody>
         </table>
       </div>
       <div class="d-flex justify-content-end">
-        <h4>Total: ${{ total_price }}</h4>
+        <h4>Final Total: ${{ final_total }}</h4>
       </div>
       <!-- Additional Actions -->
       <div class="d-flex justify-content-between mt-3">
