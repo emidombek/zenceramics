@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from .utils import add_to_cart, get_cart, remove_from_cart
 from products.models import Product
 from decimal import Decimal 
+from django.http import HttpResponseRedirect
 
 def cart_view(request):
     cart = request.session.get('cart', {})
@@ -44,3 +45,22 @@ def add_to_cart_view(request, product_id):
 def remove_from_cart_view(request, product_id):
     remove_from_cart(request, str(product_id))
     return redirect('cart_view')
+
+def update_cart_view(request, product_id):
+    if request.method == 'POST':
+        quantity = request.POST.get('quantity', 0)
+        try:
+            quantity = int(quantity)
+            if quantity > 0:
+                # Update the quantity in the session cart
+                cart = request.session.get('cart', {})
+                cart[str(product_id)] = quantity
+                request.session['cart'] = cart
+            else:
+                # Remove the item if the quantity is 0 or less
+                remove_from_cart(request, str(product_id))
+        except ValueError:
+            # Handle the exception if quantity is not an integer
+            pass
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+

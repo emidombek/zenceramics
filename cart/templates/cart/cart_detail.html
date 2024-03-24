@@ -18,7 +18,7 @@
               <th scope="col">Price</th>
               <th scope="col">Quantity</th>
               <th scope="col">Total</th>
-              <th scope="col">Remove</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -29,9 +29,17 @@
                   {{ item.name }}
                 </td>
                 <td>${{ item.price }}</td>
-                <td>{{ item.quantity }}</td>
+                <td>
+                  <!-- Update Quantity Form -->
+                  <form action="{% url 'update_cart' item.product_id %}" method="post">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control" style="width: 70px; display: inline-block;" />
+                    <button type="submit" class="btn btn-info btn-sm">Update</button>
+                  </form>
+                </td>
                 <td>${{ item.total_item_price }}</td>
                 <td>
+                  <!-- Remove Item Form -->
                   <form action="{% url 'remove_from_cart' item.product_id %}" method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger btn-sm">Remove</button>
@@ -39,7 +47,6 @@
                 </td>
               </tr>
             {% endfor %}
-            <!-- Display the Shipping Cost -->
             <tr class="table-secondary">
               <td colspan="3" class="text-end">Shipping Cost:</td>
               <td colspan="2">${{ total_shipping_cost }}</td>
@@ -50,21 +57,14 @@
       <div class="d-flex justify-content-end">
         <h4>Final Total: ${{ final_total }}</h4>
       </div>
-      <!-- Additional Actions -->
       <div class="d-flex justify-content-between mt-3">
         <a href="{% url 'products:product_list' %}" class="btn btn-outline-light">Continue Shopping</a>
         <a href="#" class="btn btn-light">Proceed to Checkout</a>
       </div>
     {% else %}
-      <div class="container mt-5">
-        <div class="row justify-content-center">
-          <div class="col-md-6 text-center">
-            <p class="py-4">
-              Your cart is empty. <a href="{% url 'products:product_list' %}">Start shopping</a>.
-            </p>
-          </div>
-        </div>
-      </div>
+      <p class="text-center py-4">
+        Your cart is empty. <a href="{% url 'products:product_list' %}">Start shopping</a>.
+      </p>
     {% endif %}
   </div>
 {% endblock %}
