@@ -3,6 +3,10 @@ from .utils import add_to_cart, get_cart, remove_from_cart
 from products.models import Product
 from decimal import Decimal 
 from django.http import HttpResponseRedirect
+from .forms import ShippingForm, PaymentForm
+from django.contrib import messages
+from .models import Order, OrderItem
+from products.models import Product
 
 def cart_view(request):
     cart = request.session.get('cart', {})
@@ -64,3 +68,35 @@ def update_cart_view(request, product_id):
             pass
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
+def checkout_view(request):
+    cart = request.session.get('cart', {})
+    if not cart:
+        messages.error(request, "Your cart is empty.")
+        return redirect('products:product_list')
+    
+    if request.method == 'POST':
+        shipping_form = ShippingForm(request.POST)
+        payment_form = PaymentForm(request.POST)
+        if shipping_form.is_valid() and payment_form.is_valid():
+            address = shipping_form.save(commit=False)
+            address.user = request.user
+            address.save()
+
+            # Assume you have a function to calculate total price from cart
+            total_price = calculate_cart_total(cart)
+
+            order = Order.objects.create(user=request.user, total_price=total_price, shipping_address=address)
+            for product_id, quantity in cart.items():
+                product = Product.objects.get(id=product_id)
+                OrderItem.objects.create(order=order, product=product, quantity=quantity, price=product.price)
+            
+            # Insert stripe payment processing here 
+
+            request.session['cart'] = {}  # Clear the cart
+            messages.success(request, "Your order has been placed.")
+            return redirect('order_success')
+    else:
+        shipping_form = ShippingForm()
+        payment_form = PaymentForm()
+
+    return render(request, 'cart/checkout.html', {'shipping_form': shipping_form, 'payment_form': payment_form})
