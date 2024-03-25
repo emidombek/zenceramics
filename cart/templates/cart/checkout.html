@@ -15,36 +15,30 @@
         <form method="post" class="form-horizontal">
           {% csrf_token %}
 
-          <!-- Items Section -->
           <div class="mt-4 mb-4">
-            <h2>Items</h2>
-            <div class="cart-summary">
+            <h2 class="text-center mb-3">Items</h2>
+            <div class="cart-summary p-3 border">
               {% for item in cart_items %}
-                <div class="row mb-2">
-                  <div class="col-4">
-                    <img src="{{ item.image_url }}" alt="{{ item.name }}" class="img-fluid" style="max-width: 100px;" />
+                <div class="row mb-3">
+                  <div class="col-md-2">
+                    <img src="{{ item.image_url }}" alt="{{ item.name }}" class="img-thumbnail" style="width: 100%;" />
                   </div>
-                  <div class="col-8">
+                  <div class="col-md-10">
                     <div>
                       <strong>{{ item.name }}</strong>
                     </div>
                     <div>${{ item.price }} x {{ item.quantity }}</div>
-                    <div>
-                      <strong>Total:</strong> ${{ item.total_item_price }}
-                    </div>
+                    <div>Total: ${{ item.total_item_price }}</div>
                   </div>
                 </div>
               {% endfor %}
-              <hr />
+            </div>
+            <div class="total-summary mt-0 p-3 border">
               <div class="text-end">
+                <div>Subtotal: ${{ total_price }}</div>
+                <div>Shipping: ${{ total_shipping_cost }}</div>
                 <div>
-                  <strong>Subtotal:</strong> ${{ total_price }}
-                </div>
-                <div>
-                  <strong>Shipping:</strong> ${{ total_shipping_cost }}
-                </div>
-                <div>
-                  <strong>Final Total:</strong> ${{ final_total }}
+                  <strong>Final Total: ${{ final_total }}</strong>
                 </div>
               </div>
             </div>
@@ -52,7 +46,7 @@
 
           <!-- Contact Section -->
           <div class="mt-4 mb-4">
-            <h3>Contact</h3>
+            <h3 class="text-center mb-3">Contact</h3>
             {% if not user.is_authenticated %}
               <!-- Guest checkout form -->
               {{ guest_form.as_p }}
