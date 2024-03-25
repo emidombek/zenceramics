@@ -1,5 +1,5 @@
 from django import forms
-from .models import Address
+from users.models import Address
 
 class GuestCheckoutForm(forms.Form):
     email = forms.EmailField()

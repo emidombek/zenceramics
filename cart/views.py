@@ -3,12 +3,12 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.conf import settings
 from django.views.decorators.http import require_POST
 from .utils import add_to_cart, remove_from_cart, calculate_cart_total
+from decimal import Decimal
 from products.models import Product
-from decimal import Decimal 
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-from .forms import GuestCheckoutForm, ShippingForm, PaymentForm
-from .models import Order, OrderItem
+from .forms import GuestCheckoutForm, AddressForm
+from orders.models import Order, OrderItem
 import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
