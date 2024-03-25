@@ -79,9 +79,8 @@ def checkout_view(request):
         return redirect('products:product_list')
 
     # Initialize forms
-    guest_form = None
-    shipping_form = ShippingForm(request.POST or None)
-    payment_form = PaymentForm(request.POST or None)  # Placeholder form
+    guest_form = GuestCheckoutForm
+    shipping_form = AddressForm(request.POST or None)
 
     if request.method == 'POST':
         if not request.user.is_authenticated:
@@ -93,7 +92,7 @@ def checkout_view(request):
         else:
             guest_form = GuestCheckoutForm()
 
-        if shipping_form.is_valid() and payment_form.is_valid():
+        if shipping_form.is_valid():
             # Process payment with Stripe
             token = request.POST.get('stripeToken')
             try:
@@ -141,7 +140,6 @@ def checkout_view(request):
     context = {
         'guest_form': guest_form,
         'shipping_form': shipping_form,
-        'payment_form': payment_form,
         'stripe_public_key': settings.STRIPE_PUBLIC_KEY
     }
 
