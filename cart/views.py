@@ -1,12 +1,16 @@
 from django.shortcuts import redirect, render
-from .utils import add_to_cart, get_cart, remove_from_cart
+from django.conf import settings
+from .utils import add_to_cart, get_cart, remove_from_cart, calculate_cart_total
 from products.models import Product
 from decimal import Decimal 
 from django.http import HttpResponseRedirect
-from .forms import ShippingForm, PaymentForm
 from django.contrib import messages
-from .models import Order, OrderItem
+from .forms import GuestCheckoutForm, ShippingForm, PaymentForm
+from .models import Address, Order, OrderItem
 from products.models import Product
+import stripe
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def cart_view(request):
     cart = request.session.get('cart', {})
@@ -69,34 +73,75 @@ def update_cart_view(request, product_id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
 def checkout_view(request):
-    cart = request.session.get('cart', {})
-    if not cart:
+    if not request.session.get('cart', {}):
         messages.error(request, "Your cart is empty.")
         return redirect('products:product_list')
-    
+
+    # Initialize forms
+    guest_form = None
+    shipping_form = ShippingForm(request.POST or None)
+    payment_form = PaymentForm(request.POST or None)  # Placeholder form
+
     if request.method == 'POST':
-        shipping_form = ShippingForm(request.POST)
-        payment_form = PaymentForm(request.POST)
+        if not request.user.is_authenticated:
+            guest_form = GuestCheckoutForm(request.POST)
+            if guest_form.is_valid():
+                email = guest_form.cleaned_data['email']
+                # Optionally, handle guest email here (e.g., save to session)
+                request.session['guest_email'] = email
+        else:
+            guest_form = GuestCheckoutForm()
+
         if shipping_form.is_valid() and payment_form.is_valid():
-            address = shipping_form.save(commit=False)
-            address.user = request.user
-            address.save()
+            # Process payment with Stripe
+            token = request.POST.get('stripeToken')
+            try:
+                total_price = calculate_cart_total(request.session['cart'])
+                charge = stripe.Charge.create(
+                    amount=int(total_price * 100),  # Amount in cents
+                    currency='usd',
+                    description='Purchase',
+                    source=token,
+                )
+                
+                # Save the address
+                if not request.user.is_authenticated:
+                    # Create a new Address object for guest
+                    address = shipping_form.save(commit=False)
+                    address.email = request.session['guest_email']
+                    address.save()
+                else:
+                    address = shipping_form.save(commit=False)
+                    address.user = request.user
+                    address.save()
+                
+                # Create Order
+                order = Order.objects.create(user=request.user if request.user.is_authenticated else None,
+                                             total_price=total_price,
+                                             shipping_address=address)
 
-            # Assume you have a function to calculate total price from cart
-            total_price = calculate_cart_total(cart)
+                # Iterate over cart items and create OrderItem objects
+                for product_id, quantity in request.session['cart'].items():
+                    product = Product.objects.get(id=product_id)
+                    OrderItem.objects.create(order=order, product=product, quantity=quantity, price=product.price)
+                
+                # Clear the cart
+                request.session['cart'] = {}
+                messages.success(request, "Your order has been placed.")
+                return redirect('order_success')
 
-            order = Order.objects.create(user=request.user, total_price=total_price, shipping_address=address)
-            for product_id, quantity in cart.items():
-                product = Product.objects.get(id=product_id)
-                OrderItem.objects.create(order=order, product=product, quantity=quantity, price=product.price)
-            
-            # Insert stripe payment processing here 
-
-            request.session['cart'] = {}  # Clear the cart
-            messages.success(request, "Your order has been placed.")
-            return redirect('order_success')
+            except stripe.error.StripeError as e:
+                # Handle Stripe errors (e.g., declined card)
+                messages.error(request, "There was a problem with your payment.")
     else:
-        shipping_form = ShippingForm()
-        payment_form = PaymentForm()
+        if not request.user.is_authenticated:
+            guest_form = GuestCheckoutForm()
 
-    return render(request, 'cart/checkout.html', {'shipping_form': shipping_form, 'payment_form': payment_form})
+    context = {
+        'guest_form': guest_form,
+        'shipping_form': shipping_form,
+        'payment_form': payment_form,
+        'stripe_public_key': settings.STRIPE_PUBLIC_KEY
+    }
+
+    return render(request, 'cart/checkout.html', context)

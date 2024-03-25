@@ -1,3 +1,5 @@
+from decimal import Decimal
+from .models import Product
 
 def get_cart(request):
     return request.session.get('cart', {})
@@ -19,3 +21,10 @@ def remove_from_cart(request, product_id):
 def clear_cart(request):
     if 'cart' in request.session:
         del request.session['cart']
+        
+def calculate_cart_total(cart):
+    total = Decimal('0.00')
+    for product_id, quantity in cart.items():
+        product = Product.objects.get(id=product_id)
+        total += product.price * Decimal(quantity)
+    return total
