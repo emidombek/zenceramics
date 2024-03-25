@@ -17,8 +17,37 @@
 
           <!-- Items Section -->
           <div class="mt-4 mb-4">
-            <h2 class="text-center">Items</h2>
-            <!-- Items display -->
+            <h2>Items</h2>
+            <div class="cart-summary">
+              {% for item in cart_items %}
+                <div class="row mb-2">
+                  <div class="col-4">
+                    <img src="{{ item.image_url }}" alt="{{ item.name }}" class="img-fluid" style="max-width: 100px;" />
+                  </div>
+                  <div class="col-8">
+                    <div>
+                      <strong>{{ item.name }}</strong>
+                    </div>
+                    <div>${{ item.price }} x {{ item.quantity }}</div>
+                    <div>
+                      <strong>Total:</strong> ${{ item.total_item_price }}
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+              <hr />
+              <div class="text-end">
+                <div>
+                  <strong>Subtotal:</strong> ${{ total_price }}
+                </div>
+                <div>
+                  <strong>Shipping:</strong> ${{ total_shipping_cost }}
+                </div>
+                <div>
+                  <strong>Final Total:</strong> ${{ final_total }}
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Contact Section -->
