@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>Checkout</h2>
+    <form method="post">
+      {% csrf_token %}
+
+      <!-- Items Section -->
+      <div class="mt-4 mb-4">
+        <h3>Items</h3>
+        <!-- Items display -->
+      </div>
+
+      <!-- Contact Section -->
+      <div class="mt-4 mb-4">
+        <h3>Contact</h3>
+        {% if not user.is_authenticated %}
+          <!-- Guest checkout form -->
+          {{ guest_form.as_p }}
+        {% else %}
+          <p>Checkout as {{ user.email }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Shipping Section -->
+      <div class="mt-4 mb-4">
+        <h3>Shipping</h3>
+        {{ shipping_form.as_p }}
+      </div>
+
+      <!-- Payment Section -->
+      <div class="mt-4 mb-4">
+        <h3>Payment</h3>
+        <div id="card-element"></div>
+        <div id="card-errors" role="alert"></div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Place order</button>
+    </form>
+  </div>
+{% endblock %}
