@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block content %}
   <div class="hero-image hero-background">
@@ -11,7 +12,6 @@
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-8 bg-white p-4 rounded">
-        <!-- Adjust col-md-8 as needed for width -->
         <form method="post" class="form-horizontal">
           {% csrf_token %}
 
@@ -49,8 +49,20 @@
             <h3 class="text-center mb-3">Contact</h3>
             <div class="contact p-3 border">
               {% if not user.is_authenticated %}
-                <!-- Guest checkout form -->
-                {{ guest_form.as_p }}
+                {% for field in guest_form %}
+                  <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field|add_class:'form-control' }}
+                    {% if field.help_text %}
+                      <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% if field.errors %}
+                      {% for error in field.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                {% endfor %}
               {% else %}
                 <p class="text-center">Checkout as {{ user.email }}</p>
               {% endif %}
@@ -60,7 +72,22 @@
           <!-- Shipping Section -->
           <div class="mt-4 mb-4">
             <h3 class="text-center">Shipping</h3>
-            <div class="shipping p-3 border">{{ shipping_form.as_p }}</div>
+            <div class="shipping p-3 border">
+              {% for field in shipping_form %}
+                <div class="form-group">
+                  {{ field.label_tag }}
+                  {{ field|add_class:'form-control' }}
+                  {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                  {% endif %}
+                  {% if field.errors %}
+                    {% for error in field.errors %}
+                      <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
           </div>
 
           <!-- Payment Section -->
