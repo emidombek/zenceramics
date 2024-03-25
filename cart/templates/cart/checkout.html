@@ -2,42 +2,52 @@
 {% load static %}
 
 {% block content %}
+  <div class="hero-image hero-background">
+    <img src="{% static '/images/paintplate.png' %}" alt="Hero Image" />
+  </div>
+  <div class="silver-banner mb-5">
+    <h1 class="text-center mb-3 mt-3">Checkout</h1>
+  </div>
   <div class="container mt-5">
-    <h2>Checkout</h2>
-    <form method="post">
-      {% csrf_token %}
+    <div class="row justify-content-center">
+      <div class="col-md-8 bg-white p-4 rounded">
+        <!-- Adjust col-md-8 as needed for width -->
+        <form method="post" class="form-horizontal">
+          {% csrf_token %}
 
-      <!-- Items Section -->
-      <div class="mt-4 mb-4">
-        <h3>Items</h3>
-        <!-- Items display -->
+          <!-- Items Section -->
+          <div class="mt-4 mb-4">
+            <h2 class="text-center">Items</h2>
+            <!-- Items display -->
+          </div>
+
+          <!-- Contact Section -->
+          <div class="mt-4 mb-4">
+            <h3>Contact</h3>
+            {% if not user.is_authenticated %}
+              <!-- Guest checkout form -->
+              {{ guest_form.as_p }}
+            {% else %}
+              <p>Checkout as {{ user.email }}</p>
+            {% endif %}
+          </div>
+
+          <!-- Shipping Section -->
+          <div class="mt-4 mb-4">
+            <h3>Shipping</h3>
+            {{ shipping_form.as_p }}
+          </div>
+
+          <!-- Payment Section -->
+          <div class="mt-4 mb-4">
+            <h3>Payment</h3>
+            <div id="card-element"></div>
+            <div id="card-errors" role="alert"></div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Place order</button>
+        </form>
       </div>
-
-      <!-- Contact Section -->
-      <div class="mt-4 mb-4">
-        <h3>Contact</h3>
-        {% if not user.is_authenticated %}
-          <!-- Guest checkout form -->
-          {{ guest_form.as_p }}
-        {% else %}
-          <p>Checkout as {{ user.email }}</p>
-        {% endif %}
-      </div>
-
-      <!-- Shipping Section -->
-      <div class="mt-4 mb-4">
-        <h3>Shipping</h3>
-        {{ shipping_form.as_p }}
-      </div>
-
-      <!-- Payment Section -->
-      <div class="mt-4 mb-4">
-        <h3>Payment</h3>
-        <div id="card-element"></div>
-        <div id="card-errors" role="alert"></div>
-      </div>
-
-      <button type="submit" class="btn btn-primary">Place order</button>
-    </form>
+    </div>
   </div>
 {% endblock %}
