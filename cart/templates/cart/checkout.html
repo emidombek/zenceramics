@@ -47,27 +47,30 @@
           <!-- Contact Section -->
           <div class="mt-4 mb-4">
             <h3 class="text-center mb-3">Contact</h3>
-            {% if not user.is_authenticated %}
-              <!-- Guest checkout form -->
-              {{ guest_form.as_p }}
-            {% else %}
-              <p>Checkout as {{ user.email }}</p>
-            {% endif %}
+            <div class="contact p-3 border">
+              {% if not user.is_authenticated %}
+                <!-- Guest checkout form -->
+                {{ guest_form.as_p }}
+              {% else %}
+                <p class="text-center">Checkout as {{ user.email }}</p>
+              {% endif %}
+            </div>
           </div>
 
           <!-- Shipping Section -->
           <div class="mt-4 mb-4">
-            <h3>Shipping</h3>
-            {{ shipping_form.as_p }}
+            <h3 class="text-center">Shipping</h3>
+            <div class="shipping p-3 border">{{ shipping_form.as_p }}</div>
           </div>
 
           <!-- Payment Section -->
           <div class="mt-4 mb-4">
-            <h3>Payment</h3>
-            <div id="card-element"></div>
-            <div id="card-errors" role="alert"></div>
+            <h4 class="text-center">Payment</h4>
+            <div class="payment p-3 border">
+              <div id="card-element"></div>
+              <div id="card-errors" role="alert"></div>
+            </div>
           </div>
-
           <button type="submit" class="btn btn-primary">Place order</button>
         </form>
       </div>
