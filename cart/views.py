@@ -1,13 +1,14 @@
-from django.shortcuts import redirect, render
+from django.http import JsonResponse
+from django.shortcuts import redirect, render, get_object_or_404
 from django.conf import settings
-from .utils import add_to_cart, get_cart, remove_from_cart, calculate_cart_total
+from django.views.decorators.http import require_POST
+from .utils import add_to_cart, remove_from_cart, calculate_cart_total
 from products.models import Product
 from decimal import Decimal 
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from .forms import GuestCheckoutForm, ShippingForm, PaymentForm
-from .models import Address, Order, OrderItem
-from products.models import Product
+from .models import Order, OrderItem
 import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -145,3 +146,30 @@ def checkout_view(request):
     }
 
     return render(request, 'cart/checkout.html', context)
+
+@require_POST
+def process_payment(request):
+    # Assuming you pass the order ID and Stripe token via POST request
+    order_id = request.POST.get('order_id')
+    token = request.POST.get('stripeToken')
+    
+    order = get_object_or_404(Order, id=order_id)
+    total_price = calculate_cart_total(order)  # Make sure this function exists
+
+    try:
+        # Stripe charge creation
+        charge = stripe.Charge.create(
+            amount=int(total_price * 100),  # Convert to cents
+            currency='usd',
+            description='Example charge',
+            source=token,
+        )
+        # Update order status upon successful charge
+        order.status = 'Payment Complete'
+        order.save()
+        
+        # Redirect or send a success response
+        return JsonResponse({"status": "success"})
+    except stripe.error.StripeError as e:
+        # Handle error
+        return JsonResponse({"status": "error", "message": str(e)})
