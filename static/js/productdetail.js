@@ -50,10 +50,6 @@ function populateAndShowModal(productId, name, image, description, price) {
     document.getElementById('modalProductDescription').textContent = description;
     document.getElementById('modalProductPrice').textContent = `Price: $${price}`;
 
-    // Correctly use the variable 'addToCartButton' to set the href attribute
-    const addToCartButton = document.getElementById('modalAddToCartButton');
-    addToCartButton.href = `/cart/add/${productId}/`; // Corrected variable name here
-
     const productDetailsModal = new bootstrap.Modal(modalElement, modalOptions);
     productDetailsModal.show();
   } else {
