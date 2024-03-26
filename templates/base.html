@@ -135,7 +135,11 @@
       </div>
     </footer>
     {% block postloadjs %}
-
+      <script>
+        var stripePublicKey = '{{ stripe_public_key }}'
+        var stripe = Stripe(stripePublicKey)
+      </script>
+      <script src="{% static 'js/payment.js' %}"></script>
     {% endblock %}
   </body>
 </html>
