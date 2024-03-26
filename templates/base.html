@@ -66,11 +66,11 @@
               {% else %}
                 <li class="nav-item d-lg-none">
                   <!-- Hide on lg and above -->
-                  <a class="nav-link" href="#">Login</a>
+                  <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                 </li>
                 <li class="nav-item d-lg-none">
                   <!-- Hide on lg and above -->
-                  <a class="nav-link" href="#">Signup</a>
+                  <a class="nav-link" href="{% url 'account_signup' %}">Signup</a>
                 </li>
               {% endif %}
             </ul>
@@ -87,7 +87,7 @@
                 </li>
                 {% if user.is_authenticated %}
                   <li>
-                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="{% url 'users:profile' %}">Profile</a>
                   </li>
                   <li>
                     <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
