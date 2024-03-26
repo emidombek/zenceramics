@@ -78,6 +78,28 @@ def checkout_view(request):
         messages.error(request, "Your cart is empty.")
         return redirect('products:product_list')
 
+    cart = request.session.get('cart', {})
+    detailed_cart_items = []
+    total_price = Decimal('0.00')
+    shipping_cost_per_item = Decimal('25.00')
+    total_items = sum(cart.values())
+    total_shipping_cost = total_items * shipping_cost_per_item
+
+    for product_id, quantity in cart.items():
+        product = Product.objects.get(id=product_id)
+        total_item_price = product.price * Decimal(quantity)
+        total_price += total_item_price
+        detailed_cart_items.append({
+            'product_id': product_id,
+            'name': product.name,
+            'price': product.price,
+            'quantity': quantity,
+            'total_item_price': total_item_price,
+            'image_url': product.image.url if product.image else None,
+        })
+    
+    final_total = total_price + total_shipping_cost
+
     # Initialize forms
     guest_form = GuestCheckoutForm
     shipping_form = AddressForm(request.POST or None)
@@ -140,7 +162,11 @@ def checkout_view(request):
     context = {
         'guest_form': guest_form,
         'shipping_form': shipping_form,
-        'stripe_public_key': settings.STRIPE_PUBLIC_KEY
+        'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
+        'cart_items': detailed_cart_items,
+        'total_price': total_price,
+        'total_shipping_cost': total_shipping_cost,
+        'final_total': final_total,
     }
 
     return render(request, 'cart/checkout.html', context)
