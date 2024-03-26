@@ -36,11 +36,11 @@
               <div class="mb-3">
                 <p>{{ address.name }}</p>
                 <!-- Other address fields -->
-                <a href="{% url 'edit_address' address.id %}" class="btn btn-secondary btn-sm">Edit</a>
-                <a href="{% url 'delete_address' address.id %}" class="btn btn-danger btn-sm">Delete</a>
+                <a href="#" class="btn btn-secondary btn-sm">Edit</a>
+                <a href="#" class="btn btn-danger btn-sm">Delete</a>
               </div>
             {% endfor %}
-            <a href="{% url 'add_address' %}" class="btn btn-primary btn-sm">Add New Address</a>
+            <a href="#" class="btn btn-primary btn-sm">Add New Address</a>
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@
               <div class="mb-3">
                 <p>{{ wishlist.product.name }}</p>
                 <!-- Other wishlist details -->
-                <a href="{% url 'delete_wishlist' wishlist.id %}" class="btn btn-danger btn-sm">Delete</a>
+                <a href="#" class="btn btn-danger btn-sm">Delete</a>
               </div>
             {% endfor %}
           </div>
