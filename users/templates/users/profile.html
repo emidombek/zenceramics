@@ -9,12 +9,12 @@
   </div>
 
   <div class="container mt-4">
-    <div class="row">
+    <div class="row justify-content-center">
       <!-- Pending Orders -->
-      <div class="col-md-4">
-        <h2 class="text-center">Pending Orders</h2>
+      <div class="col-md-4 mb-4">
         <div class="card">
           <div class="card-body">
+            <h2 class="text-center">Pending Orders</h2>
             {% for order in orders %}
               <div class="mb-3">
                 <p>Order ID: {{ order.id }}</p>
@@ -28,10 +28,10 @@
       </div>
 
       <!-- Addresses -->
-      <div class="col-md-4">
-        <h2 class="text-center">Addresses</h2>
+      <div class="col-md-4 mb-4">
         <div class="card">
           <div class="card-body">
+            <h2 class="text-center">Addresses</h2>
             {% for address in addresses %}
               <div class="mb-3">
                 <p>{{ address.name }}</p>
@@ -46,10 +46,10 @@
       </div>
 
       <!-- Wishlist -->
-      <div class="col-md-4">
-        <h2 class="text-center">Wishlist</h2>
+      <div class="col-md-4 mb-4">
         <div class="card">
           <div class="card-body">
+            <h2 class="text-center">Wishlist</h2>
             {% for wishlist in wishlists %}
               <div class="mb-3">
                 <p>{{ wishlist.product.name }}</p>
