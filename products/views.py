@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from django.http import JsonResponse
 from django.views import View
 from django.shortcuts import get_object_or_404
-from .models import Product
+from .models import Product,Review
 
 
 
@@ -45,4 +45,18 @@ class ProductDetailView(View):
             'created_at': product.created_at,
             'updated_at': product.updated_at,
         }
-        return JsonResponse(product_data)
+     # Add reviews to the response data
+        reviews_data = [{
+            'user': review.user.username,
+            'rating': review.rating,
+            'comment': review.comment,
+            'created_at': review.created_at
+        } for review in reviews_data]
+
+        # Combine product data and reviews into a single response
+        response_data = {
+            'product': product_data,
+            'reviews': reviews_data,
+        }
+
+        return JsonResponse(response_data)
