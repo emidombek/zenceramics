@@ -10,8 +10,23 @@
         <p id="modalProductDescription"></p>
         <p id="modalProductPrice"></p>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <div class="product-reviews">
+        <h1>Reviews</h1>
+        {% if reviews %}
+          {% for review in reviews %}
+            <div class="review">
+              <strong>User:</strong> {{ review.user.username }}<br />
+              <strong>Rating:</strong> {{ review.rating }}<br />
+              <strong>Comment:</strong> {{ review.comment }}<br />
+              <strong>Date:</strong> {{ review.created_at|date:'Y-m-d' }}
+            </div>
+          {% endfor %}
+        {% else %}
+          <p>No reviews yet.</p>
+        {% endif %}
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
