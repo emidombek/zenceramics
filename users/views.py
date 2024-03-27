@@ -36,3 +36,8 @@ def add_to_wishlist(request, product_id):
     else:
         form = WishlistForm()
     return render(request, 'add_to_wishlist.html', {'form': form, 'product': product})
+
+@login_required
+def wishlist_detail(request):
+    wishlist_items = Wishlist.objects.filter(user=request.user)
+    return render(request, 'wishlist_detail.html', {'wishlist_items': wishlist_items})
