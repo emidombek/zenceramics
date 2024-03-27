@@ -1,6 +1,12 @@
 from django.contrib import admin
 from .models import Order, OrderItem
 
+def make_order_shipped(modeladmin, request, queryset):
+    queryset.update(status='Shipped')
+make_order_shipped.short_description = "Mark selected orders as shipped"
+
+class OrderAdmin(admin.ModelAdmin):
+    actions = [make_order_shipped]
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
     extra = 1
