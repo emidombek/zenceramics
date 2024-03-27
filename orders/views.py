@@ -40,3 +40,8 @@ def order_create(request):
 def order_detail(request, order_id):
     order = get_object_or_404(Order, id=order_id, user=request.user)
     return render(request, 'orders/order_detail.html', {'order': order})
+
+@login_required
+def view_order_history(request):
+    orders = Order.objects.filter(user=request.user).order_by('-order_date')
+    return render(request, 'orders/order_history.html', {'orders': orders})
