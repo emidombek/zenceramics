@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Your Wishlist</h2>
+  {% for item in wishlist_items %}
+    <div>
+      <p>Product: {{ item.product.name }}</p>
+      <p>Notes: {{ item.notes }}</p>
+      <p>Quantity: {{ item.quantity }}</p>
+    </div>
+  {% endfor %}
+{% endblock %}
